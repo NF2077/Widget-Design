@@ -1,100 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Widget Design Collection - NF2077</title>
     <link rel="stylesheet" href="style.css">
-    <title>Widget #3 - Vertical Timeline | AsmrProg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
 
-    <div class="container">
-        <div class="timeline">
-            <div class="timeline-box" id="primary">
-                <div class="icon">
-                    <i class="far fa-grin-wink"></i>
-                </div>
-                <div class="timeline-body">
-                    <h4 class="header"><span class="badge">Primary</span></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam necessitatibus numquam earum
-                        ipsa fugiat veniam suscipit, officiis repudiandae, eum recusandae neque dignissimos. Cum fugit
-                        laboriosam culpa, repellendus esse commodi deserunt.</p>
-                    <p class="time">1 Hours Ago</p>
-                </div>
-            </div>
+    <header>
+        <h1>🎨 Widget Collection v2.5</h1>
+        <p>Eksplorasi 7 Komponen UI/UX Interaktif dengan JavaScript Murni</p>
+    </header>
 
-            <div class="timeline-box" id="success">
-                <div class="icon">
-                    <i class="far fa-grin-tears"></i>
-                </div>
-                <div class="timeline-body">
-                    <h4 class="header"><span class="badge">Success</span></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam necessitatibus numquam earum
-                        ipsa fugiat veniam suscipit, officiis repudiandae, eum recusandae neque dignissimos. Cum fugit
-                        laboriosam culpa, repellendus esse commodi deserunt.</p>
-                    <p class="time">3 Hours Ago</p>
-                </div>
-            </div>
+    <main class="widget-container">
 
-            <div class="timeline-box" id="danger">
-                <div class="icon">
-                    <i class="far fa-grin-hearts"></i>
-                </div>
-                <div class="timeline-body">
-                    <h4 class="header"><span class="badge">Danger</span></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam necessitatibus numquam earum
-                        ipsa fugiat veniam suscipit, officiis repudiandae, eum recusandae neque dignissimos. Cum fugit
-                        laboriosam culpa, repellendus esse commodi deserunt.</p>
-                    <p class="time">8 Hours Ago</p>
-                </div>
+        <div class="widget card-weather">
+            <div class="widget-header">
+                <h3>🌤️ Weather</h3>
+                <button id="refresh-weather" title="Simulasikan Cuaca Baru">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
             </div>
-
-            <div class="timeline-box" id="secondary">
-                <div class="icon">
-                    <i class="far fa-grin-beam-sweat"></i>
-                </div>
-                <div class="timeline-body">
-                    <h4 class="header"><span class="badge">Secondary</span></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam necessitatibus numquam earum
-                        ipsa fugiat veniam suscipit, officiis repudiandae, eum recusandae neque dignissimos. Cum fugit
-                        laboriosam culpa, repellendus esse commodi deserunt.</p>
-                    <p class="time">1 Days Ago</p>
-                </div>
+            <div class="weather-main">
+                <i id="w-icon" class="fa-solid fa-cloud-sun weather-icon-demo"></i>
+                <h2 id="w-temp">28°C</h2>
             </div>
-
-            <div class="timeline-box" id="warning">
-                <div class="icon">
-                    <i class="far fa-grimace"></i>
-                </div>
-                <div class="timeline-body">
-                    <h4 class="header"><span class="badge">Warning</span></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam necessitatibus numquam earum
-                        ipsa fugiat veniam suscipit, officiis repudiandae, eum recusandae neque dignissimos. Cum fugit
-                        laboriosam culpa, repellendus esse commodi deserunt.</p>
-                    <p class="time">3 Days Ago</p>
-                </div>
+            <p id="w-desc" class="weather-desc">Cerah Berawan</p>
+            <div class="weather-sub">
+                <span><i class="fa-solid fa-droplet"></i> <span id="w-humid">75%</span></span>
+                <span><i class="fa-solid fa-wind"></i> <span id="w-wind">4 m/s</span></span>
             </div>
-
-            <div class="timeline-box" id="info">
-                <div class="icon">
-                    <i class="far fa-grin"></i>
-                </div>
-                <div class="timeline-body">
-                    <h4 class="header"><span class="badge">Info</span></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam necessitatibus numquam earum
-                        ipsa fugiat veniam suscipit, officiis repudiandae, eum recusandae neque dignissimos. Cum fugit
-                        laboriosam culpa, repellendus esse commodi deserunt.</p>
-                    <p class="time">6 Days Ago</p>
-                </div>
-            </div>
-
         </div>
-    </div>
 
+        <div class="widget card-music">
+            <h3>🎵 Music Player</h3>
+            <div class="music-info">
+                <div class="disc" id="disc">
+                    <i class="fa-solid fa-music"></i>
+                </div>
+                <div class="track-details">
+                    <h4>Cyberpunk Beats</h4>
+                    <p>NF2077 Sound Lab</p>
+                </div>
+            </div>
+            <div class="music-controls">
+                <button aria-label="Previous"><i class="fa-solid fa-backward"></i></button>
+                <button class="play-btn" id="play-btn" aria-label="Play/Pause">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <button aria-label="Next"><i class="fa-solid fa-forward"></i></button>
+            </div>
+        </div>
+
+        <div class="widget card-todo">
+            <h3>📅 Dynamic Todo List</h3>
+            <div class="todo-input-group">
+                <input type="text" id="todo-input" placeholder="Tambah tugas baru..." autocomplete="off">
+                <button id="add-todo-btn" aria-label="Add Task">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div class="todo-box" id="todo-box">
+                </div>
+        </div>
+
+        <div class="widget card-analytics">
+            <h3>📊 Weekly Activity</h3>
+            <div class="chart">
+                <div class="bar" style="--bar-height: 40%;" data-day="Sen" data-value="40%"></div>
+                <div class="bar" style="--bar-height: 70%;" data-day="Sel" data-value="70%"></div>
+                <div class="bar" style="--bar-height: 55%;" data-day="Rab" data-value="55%"></div>
+                <div class="bar" style="--bar-height: 90%;" data-day="Kam" data-value="90%"></div>
+                <div class="bar" style="--bar-height: 35%;" data-day="Jum" data-value="35%"></div>
+            </div>
+        </div>
+
+        <div class="widget card-clock">
+            <div class="clock-icon"><i class="fa-regular fa-clock"></i></div>
+            <h2 id="clock">00:00:00</h2>
+            <p id="date">Memuat tanggal...</p>
+        </div>
+
+        <div class="widget card-calc">
+            <h3>🧮 Calculator</h3>
+            <div class="calc-screen" id="calc-screen">0</div>
+            <div class="calc-buttons">
+                <button class="btn-clear" id="calc-clear">C</button>
+                <button class="btn-op" data-op="/">÷</button>
+                <button class="btn-op" data-op="*">×</button>
+                <button class="btn-op" data-op="-">−</button>
+                
+                <button class="btn-num">7</button>
+                <button class="btn-num">8</button>
+                <button class="btn-num">9</button>
+                <button class="btn-op" data-op="+">+</button>
+                
+                <button class="btn-num">4</button>
+                <button class="btn-num">5</button>
+                <button class="btn-num">6</button>
+                <button class="btn-equal" id="calc-equal">=</button>
+                
+                <button class="btn-num">1</button>
+                <button class="btn-num">2</button>
+                <button class="btn-num">3</button>
+                <button class="btn-num">0</button>
+            </div>
+        </div>
+
+        <div class="widget card-crypto">
+            <div class="widget-header">
+                <h3>📈 Crypto Tracker</h3>
+                <span class="crypto-badge">LIVE</span>
+            </div>
+            <div class="crypto-row">
+                <div class="crypto-name">
+                    <i class="fa-brands fa-bitcoin bitcoin-icon"></i>
+                    <div>
+                        <h4>BTC</h4>
+                        <p>Bitcoin</p>
+                    </div>
+                </div>
+                <div class="crypto-price-box">
+                    <h4 id="btc-price">$67,420</h4>
+                    <p id="btc-change" class="price-up"><i class="fa-solid fa-caret-up"></i> +2.4%</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
