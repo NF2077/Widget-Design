@@ -1,8 +1,9 @@
 /**
  * ==========================================================================
- * WIDGET DESIGN COLLECTION - COMPLETE ENGINE v2.5
+ * WIDGET DESIGN COLLECTION - COMPLETE ENGINE v3.0
  * Repositori: NF2077/Widget-Design
- * Fitur: Mengelola 7 komponen widget interaktif secara dinamis dan real-time.
+ * Fitur: Mengelola 7 komponen widget interaktif secara dinamis, real-time,
+ * dan dilengkapi kalkulator scientific serta multi-crypto tracker.
  * ==========================================================================
  */
 
@@ -131,11 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 5. WIDGET MINI CALCULATOR
+    // 5. WIDGET ADVANCED SCIENTIFIC CALCULATOR
     // ==========================================
     const calcScreen = document.getElementById('calc-screen');
     let calcExpression = "";
 
+    // Input Angka dan Desimal
     document.querySelectorAll('.btn-num').forEach(button => {
         button.addEventListener('click', () => {
             if (calcScreen.innerText === "0" || calcScreen.innerText === "Error") {
@@ -147,28 +149,73 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Input Operator Dasar
     document.querySelectorAll('.btn-op').forEach(button => {
         button.addEventListener('click', () => {
+            const op = button.getAttribute('data-op');
             const lastChar = calcExpression.slice(-1);
-            if (["+", "-", "*", "/"].includes(lastChar)) {
-                calcExpression = calcExpression.slice(0, -1) + button.getAttribute('data-op');
-            } else if (calcExpression !== "") {
-                calcExpression += button.getAttribute('data-op');
+            if (["+", "-", "*", "/", "%"].includes(lastChar)) {
+                calcExpression = calcExpression.slice(0, -1) + op;
+            } else if (calcExpression !== "" || op === "-") {
+                calcExpression += op;
             }
             calcScreen.innerText = calcExpression || "0";
         });
     });
 
+    // Operasi Fungsi Sains (sin, cos, tan, sqrt, pi)
+    document.querySelectorAll('.btn-sci').forEach(button => {
+        button.addEventListener('click', () => {
+            const action = button.getAttribute('data-sci');
+            try {
+                let currentVal = parseFloat(calcScreen.innerText) || 0;
+                let result;
+
+                switch (action) {
+                    case 'sin':
+                        result = Math.sin(currentVal * Math.PI / 180); // Menggunakan derajat
+                        break;
+                    case 'cos':
+                        result = Math.cos(currentVal * Math.PI / 180);
+                        break;
+                    case 'tan':
+                        result = Math.tan(currentVal * Math.PI / 180);
+                        break;
+                    case 'sqrt':
+                        if (currentVal < 0) throw new Error();
+                        result = Math.sqrt(currentVal);
+                        break;
+                    case 'pi':
+                        if (calcExpression === "" || calcScreen.innerText === "0") {
+                            calcExpression = Math.PI.toString();
+                        } else {
+                            calcExpression += `*${Math.PI}`;
+                        }
+                        calcScreen.innerText = "π";
+                        return;
+                }
+
+                calcScreen.innerText = Number.isInteger(result) ? result : result.toFixed(5);
+                calcExpression = calcScreen.innerText;
+            } catch {
+                calcScreen.innerText = "Error";
+                calcExpression = "";
+            }
+        });
+    });
+
+    // Tombol AC/Clear (C)
     document.getElementById('calc-clear').addEventListener('click', () => {
         calcExpression = "";
         calcScreen.innerText = "0";
     });
 
+    // Evaluasi (=)
     document.getElementById('calc-equal').addEventListener('click', () => {
         try {
             if (calcExpression !== "") {
                 const result = Function(`"use strict"; return (${calcExpression})`)();
-                calcScreen.innerText = Number.isInteger(result) ? result : result.toFixed(2);
+                calcScreen.innerText = Number.isInteger(result) ? result : result.toFixed(4);
                 calcExpression = calcScreen.innerText;
             }
         } catch {
@@ -179,27 +226,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 6. WIDGET CRYPTO TRACKER SIMULATOR
+    // 6. MULTI CRYPTO TRACKER ENGINE (BTC, ETH, SOL)
     // ==========================================
-    const btcPriceEl = document.getElementById('btc-price');
-    const btcChangeEl = document.getElementById('btc-change');
-    let currentBtcPrice = 67420;
+    const cryptoAssets = {
+        btc: { price: 67420, elPrice: document.getElementById('btc-price'), elChange: document.getElementById('btc-change') },
+        eth: { price: 3480, elPrice: document.getElementById('eth-price'), elChange: document.getElementById('eth-change') },
+        sol: { price: 165, elPrice: document.getElementById('sol-price'), elChange: document.getElementById('sol-change') }
+    };
 
-    function simulateCryptoTicker() {
-        const changeAmount = (Math.random() * 300) - 150;
-        currentBtcPrice += changeAmount;
-        const percentageChange = (Math.random() * 5).toFixed(1);
-        
-        btcPriceEl.innerText = `$${Math.round(currentBtcPrice).toLocaleString('en-US')}`;
+    function simulateCryptoMarket() {
+        Object.keys(cryptoAssets).forEach(key => {
+            const coin = cryptoAssets[key];
+            
+            // Pergerakan acak berbanding lurus dengan nilai aset masing-masing
+            const volatility = coin.price * 0.002; 
+            const changeAmount = (Math.random() * (volatility * 2)) - volatility;
+            coin.price += changeAmount;
 
-        if (changeAmount >= 0) {
-            btcChangeEl.className = "price-up";
-            btcChangeEl.innerHTML = `<i class="fa-solid fa-caret-up"></i> +${percentageChange}%`;
-        } else {
-            btcChangeEl.className = "price-down";
-            btcChangeEl.innerHTML = `<i class="fa-solid fa-caret-down"></i> -${percentageChange}%`;
-        }
+            const percentageChange = (Math.random() * 3.5).toFixed(1);
+            
+            // Format rendering mata uang
+            coin.elPrice.innerText = `$${coin.price.toLocaleString('en-US', { minimumFractionDigits: key === 'sol' ? 2 : 0, maximumFractionDigits: 2 })}`;
+
+            if (changeAmount >= 0) {
+                coin.elChange.className = "price-up";
+                coin.elChange.innerHTML = `<i class="fa-solid fa-caret-up"></i> +${percentageChange}%`;
+            } else {
+                coin.elChange.className = "price-down";
+                coin.elChange.innerHTML = `<i class="fa-solid fa-caret-down"></i> -${percentageChange}%`;
+            }
+        });
     }
-    setInterval(simulateCryptoTicker, 3000);
+    // Update fluktuasi pasar finansial secara independen tiap 3 detik
+    setInterval(simulateCryptoMarket, 3000);
 
 });
