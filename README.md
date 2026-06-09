@@ -10,7 +10,7 @@ Berikut adalah beberapa widget yang tersedia di dalam repositori ini:
 2. **🎵 Music Player Widget** - Kontrol pemutar musik mini dengan animasi piringan hitam/cover album.
 3. **📅 Calendar & Todo Widget** - Pengingat tanggal dan catatan harian yang minimalis.
 4. **📊 Analytics Tracker** - Grafik mini untuk memantau aktivitas atau statistik harian.
-5. [Tambahkan widget lain milikmu di sini...]
+5. Etc
 
 ## ✨ Fitur Utama
 
